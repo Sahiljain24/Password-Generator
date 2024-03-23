@@ -1,5 +1,3 @@
-// const { handle } = require("express/lib/application");
-
 const inputSlider = document.querySelector("[data-lengthSlider]");
 const lengthDisplay = document.querySelector("[data-lengthNumber]");
 
@@ -39,7 +37,7 @@ function getRndInteger(max,min){
     return Math.floor(Math.random()*(max-min) )+min;
 }
 function generateRandomNumber(){
-    return getRndInteger(0.9);
+    return getRndInteger(0,9);
 }
 function generateLowerCase(){
     let a=getRndInteger(97,123);
@@ -98,11 +96,22 @@ function handleCheckBoxChange(){
         if(checkbox.checked){
             checkCount++;
         }
-    })
+    });
     if(passwordLength<checkCount){
         passwordLength=checkCount;
         handleSlider();
     }
+}
+function shufflePassword(array){
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+      }
+    let str = "";
+    array.forEach((el) => (str += el));
+    return str;
 }
 
 allCheckBox.forEach( (checkbox)=>{ 
@@ -118,3 +127,44 @@ copyBtn.addEventListener('click',()=>{
         copyContent();
     }
 })
+
+generateBtn.addEventListener('click',()=>{
+     if(checkCount<=0)
+     return;
+
+     if(checkCount>passwordLength){
+        passwordLength=checkCount ;
+        handleSlider();
+     }
+
+
+     password="";
+
+     let funcArr=[];
+     if(uppercaseCheck.checked){
+        funcArr.push(generateUpperCase);
+     }
+     if(lowercaseCheck.checked){
+        funcArr.push(generateLowerCase);
+     }
+     if(symbolsCheck.checked){
+        funcArr.push(generateSymbol);
+     }
+     if(numbersCheck.checked){
+        funcArr.push(generateRandomNumber);
+     }
+
+     for(let i=0;i<funcArr.length;i++){
+        password+=funcArr[i]();
+     }
+     for(let i=0;i<passwordLength-funcArr.length;i++){
+        let r=getRndInteger(0,funcArr.length-1);
+        password+=funcArr[r]();
+     }
+
+     password=shufflePassword(Array.from(password));
+     passwordDisplay.value=password;
+     calcStrength();
+
+
+});

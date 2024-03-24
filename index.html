@@ -1,9 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"></html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Password Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;200;300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     
@@ -12,8 +19,8 @@
             <div class="display-container">
                
             <input readonly placeholder="Password" class="display" data-passwordDisplay>
-            <button data-copy>
-                <span data-copyMsg></span>
+            <button class="copyBtn" data-copy>
+                <span class="tooltip" data-copyMsg></span>
                 <img src="./assets/copy.svg" alt="copy" width="23" height="23">
             </button>
 
@@ -21,7 +28,7 @@
            </div>
 
 
-           <div class="input-section">
+           <div class="input-container">
             
             <div class="length-container">
                 <p>Password Length</p>
@@ -33,19 +40,19 @@
 
 
            
-            <div>
+            <div class="check">
                 <input type="checkbox" name="Uppercase" id="uppercase">
                 <label for="Uppercase">Includes Uppercase letters</label>
             </div>
-            <div>
+            <div class="check">
                 <input type="checkbox" name="lowercase" id="lowercase">
                 <label for="Lowercase">Includes Lowercase letters</label>
             </div>
-            <div>
+            <div class="check">
                 <input type="checkbox" name="Numbers" id="numbers">
                 <label for="Numbers">Includes Numbers</label>
             </div>
-            <div>
+            <div class="check">
                 <input type="checkbox" name="Symbols" id="symbols">
                 <label for="Symbols">Includes Symbols</label>
             </div>
@@ -54,12 +61,14 @@
            
            <div class="strength-container">
             <p>Strength</p>
-            <div data-indicator></div>
+            <div class="indicator" data-indicator></div>
            </div>
            <button class="generateButton">Generate Password</button>
         </div>
         </div>
-  
+      
+
+       
     <script src="script.js"></script>
 </body>
 </html>

@@ -16,10 +16,10 @@ const symbols = '~`!@#$%^&*()_-+={[}]|:;"<,>.?/';
 
 let password ="";
 let passwordLength=10;
-let checkCount=1;
+let checkCount=0;
 handleSlider();
 
-
+setIndicator("#ccc");
 
 
 
@@ -27,11 +27,14 @@ handleSlider();
  function handleSlider(){
     inputSlider.value =passwordLength;
     lengthDisplay.innerText =passwordLength;
-
+    const min = inputSlider.min;
+    const max = inputSlider.max;
+    inputSlider.style.backgroundSize = ( (passwordLength - min)*100/(max - min)) + "% 100%"
  }
  function setIndicator(color) {
     indicator.style.backgroundColor = color;
-    //shadow - HW
+    indicator.style.boxShadow = `0px 0px 12px 1px ${color}`;
+
 }
 function getRndInteger(max,min){
     return Math.floor(Math.random()*(max-min) )+min;
@@ -129,7 +132,7 @@ copyBtn.addEventListener('click',()=>{
 })
 
 generateBtn.addEventListener('click',()=>{
-     if(checkCount<=0)
+     if(checkCount==0)
      return;
 
      if(checkCount>passwordLength){
